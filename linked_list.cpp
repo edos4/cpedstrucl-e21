@@ -33,7 +33,6 @@ void search(int num) {
   }
 }
 
-
 void append(int num) {
   struct node * temp, * right;
   temp = (struct node * ) malloc(sizeof(struct node));
@@ -83,7 +82,6 @@ int delete_val(int num) {
       if (temp == head) {
         head = temp -> next;
         cout << "d1";
-        free(temp);
         return 1;
       } else {
         prev -> next = temp -> next;
@@ -139,11 +137,11 @@ int main() {
   int i, num, loc;
   struct node * n;
   head = NULL;
-//  insert(1);
-//  insert(4);
-//  insert(3);
-//  insert(4);
-//  insert(4);
+  insert(1);
+  insert(4);
+  insert(3);
+  insert(4);
+  insert(4);
   while (1) {
   	system("cls");
     cout<<"Linked List Operations\n";
