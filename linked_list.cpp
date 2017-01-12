@@ -82,10 +82,12 @@ int delete_val(int num) {
     if (temp -> data == num) {
       if (temp == head) {
         head = temp -> next;
+        cout << "d1";
         free(temp);
         return 1;
       } else {
         prev -> next = temp -> next;
+        cout << "d2";
         free(temp);
         return 1;
       }
@@ -102,31 +104,24 @@ void delete_all(int num) {
   int c = 0;
   n = head;
   while (n != NULL) {
-    delete_val(num); 
+  	delete_val(num); 
     n = n -> next;
     c++;
   }
 }
 
 void insert(int num) {
-  int c = 0;
   struct node * temp;
   temp = head;
   if (temp == NULL) {
     add(num);
   } else {
     while (temp != NULL) {
-      if (temp -> data != -1)
-        c++;
       temp = temp -> next;
     }
-    if (c == 0)
-      add(num);
-    else
-      append(num);
+    append(num);
   }
 }
-
 
 void display(struct node * r) {
   r = head;
@@ -144,6 +139,11 @@ int main() {
   int i, num, loc;
   struct node * n;
   head = NULL;
+//  insert(1);
+//  insert(4);
+//  insert(3);
+//  insert(4);
+//  insert(4);
   while (1) {
   	system("cls");
     cout<<"Linked List Operations\n";
