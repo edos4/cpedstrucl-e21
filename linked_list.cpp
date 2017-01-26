@@ -1,15 +1,25 @@
 #include<stdio.h> 
 #include<stdlib.h>
 #include<iostream>
+#include<string.h>
 #include<conio.h>
 using namespace std;
 
 struct node {
-	int data;
+	char data;
 	struct node * next;
 } *head;
   
-int count() {
+int count(struct node * r, int sum) {
+  if (r == NULL) {
+    return sum;
+  }
+  else{
+  	count(r -> next, sum+1);
+  }
+}
+
+int count2() {
   struct node * n;
   int c = 0;
   n = head;
@@ -121,7 +131,7 @@ void insert(int num) {
   }
 }
 
-void display(struct node * r) {
+void display2(struct node * r) {
   r = head;
   if (r == NULL) {
     return;
@@ -133,15 +143,28 @@ void display(struct node * r) {
   printf("\n");
 }
 
+void display(struct node * r) {
+  if (r == NULL) {
+    return;
+  }
+  else{
+  	cout << r -> data;
+  	display(r -> next);
+  }
+}
+
 int main() {
   int i, num, loc;
   struct node * n;
+  char name[100];
   head = NULL;
-  insert(1);
-  insert(4);
-  insert(3);
-  insert(4);
-  insert(4);
+//  insert('e');
+//  insert('d');
+//  insert(' ');
+//  insert('p');
+//  insert('o');
+//  insert('g');
+//  insert('i');
   while (1) {
   	system("cls");
     cout<<"Linked List Operations\n";
@@ -149,7 +172,7 @@ int main() {
     cout<<"1.Insert\n";
     cout<<"2.Add After\n";
     cout<<"3.Display\n";
-    cout<<"4.Size\n";
+    cout<<"4.Count\n";
     cout<<"5.Delete\n";
     cout<<"6.Delete All\n";
     cout<<"7.Search\n";
@@ -163,9 +186,17 @@ int main() {
       switch (i) {
       	
       case 1:
-        cout<<"Enter the number to insert : ";
-        cin>>num;
-        insert(num);
+        cout<<"Enter string: ";
+        cin.ignore(100, '\n');
+        cin.getline(name, 100, '\n');
+        for(int j=0; j<100; j++){
+        	if(name[j] == '\0'){
+				break;
+			}
+        	else	
+        		insert(name[j]);
+		}
+        //insert(num);
         break;
         
       case 2:
@@ -181,11 +212,13 @@ int main() {
         } else {
           cout<<"Element(s) in the list are : ";
         }
+        n=head;
         display(n);
         break;
         
       case 4:
-        cout<<"Size of the list is " << count() <<endl;
+      	n=head;
+        cout<<"Size of the list is " << count(n, 0) <<endl;
         break;
         
       case 5:
