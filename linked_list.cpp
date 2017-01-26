@@ -187,8 +187,8 @@ int main() {
       	
       case 1:
         cout<<"Enter string: ";
-        cin.ignore(100, '\n');
-        cin.getline(name, 100, '\n');
+        cin.ignore();
+        cin.getline(name, 100);
         for(int j=0; j<100; j++){
         	if(name[j] == '\0'){
 				break;
