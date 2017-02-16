@@ -23,7 +23,7 @@ class avlTree{
 		avl_node *lr_rotation(avl_node *);
 		avl_node *rl_rotation(avl_node *);
 		avl_node* balance(avl_node *);
-		avl_node* insert(avl_node *, int);
+		avl_node* insert(avl_node *, char);
 		void display(avl_node *, int);
 		void inorder(avl_node *);
 		void preorder(avl_node *);
@@ -33,14 +33,26 @@ class avlTree{
 		}
 };
 int main(){
-	int choice;
+	int choice, i;
 	char item;
 	avlTree avl;
+	char expression[100];
+//	root = avl.insert(root, 'a');
+//	root = avl.insert(root, '+');
+//	root = avl.insert(root, 'b');
+//	root = avl.insert(root, '*');
+//	root = avl.insert(root, 'c');
+	
+	
+	//inorder = a+b*c
+	//preorder = *+abc
+	//postorder = abc+*
+	
 	while(1){
 		cout << "\n---------------------"<<endl;
 		cout << "AVL Tree Implementation"<<endl;
 		cout << "\n---------------------"<<endl;
-		cout << "1. Insert Element into the tree"<<endl;
+		cout << "1. Insert expression"<<endl;
 		cout << "2. Display Balanced AVL Tree"<<endl;
 		cout << "3. InOrder traversal"<<endl;
 		cout << "4. PreOrder traversal"<<endl;
@@ -50,9 +62,16 @@ int main(){
 		cin >> choice;
 		switch(choice){
 			case 1:
-				cout << "Enter value to be inserted: ";
-				cin >> item;
-				root = avl.insert(root, item);
+				cin.ignore();
+				cout << "Enter expression to be inserted: ";
+				cin.getline(expression,100);
+				for(int i=0; i<100; i++){
+		        	if(expression[i] == '\0'){
+						break;
+					}
+		        	else	
+		        		root = avl.insert(root, expression[i]);
+				}
 				break;
 			case 2:
 				if(root == NULL){
@@ -144,7 +163,7 @@ avl_node *avlTree::balance(avl_node *temp){
 	}
 	return temp;
 }
-avl_node *avlTree::insert(avl_node *root, int value){
+avl_node *avlTree::insert(avl_node *root, char value){
 	if(root == NULL){
 		root = new avl_node;
 		root-> data = value;
