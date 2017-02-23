@@ -5,6 +5,7 @@
 using namespace std;
 struct node {
 	int data;
+	int index;
 	struct node * next;
 	struct node * prev;
 } *head;
@@ -112,7 +113,29 @@ void insert(int num) {
   }
 }
 
-
+void bubble_sort(struct node * r) {
+    for(int i = count() ; i > 1 ; i-- ){
+        node *temp, *swap1;
+        swap1 = head;
+        for(int j = 0 ; j < count()-1 ; j++ ){
+            if(swap1->data > swap1->next->data){
+                node *swap2 = swap1->next;
+                swap1->next = swap2->next;
+                swap2->next = swap1;
+                if(swap1 == head){
+                    head = swap2;
+                    swap1 = swap2;
+                }
+                else{
+                    swap1 = swap2;
+                    temp->next = swap2;
+                }
+            }
+            temp = swap1;
+            swap1 = swap1->next;
+        }
+    }
+}
 
 void display(struct node * r) {
   r = head;
@@ -126,13 +149,45 @@ void display(struct node * r) {
   printf("\n");
 }
 
-void bubble_sort(struct node * r) {
+void selection_sort(struct node * r) {
+	node *ip, *jp, *index, *swap2;
+	ip = head;
+	jp = ip;
+    for(int i = 0 ; i < count()-1 ; i++ ){
+        int min = ip->data;
+        index = ip;
+        cout <<"a"<<endl;
+        for(int j = i+1 ; j < count() ; j++ ){
+        	cout <<"b"<<endl;
+            if(jp->data < min){
+            	if(jp == head){
+                    head = swap2;
+                    jp = swap2;
+                }
+                else{
+                    cout <<"in if jp:"<< jp->data <<"min: "<<min<<endl;
+	                min = jp->data;
+	                index = jp;
+                }
+            }
+            jp = jp->next;
+        }
+        cout <<"c"<<endl;
+        index = ip;
+        ip->data = min;
+        ip = ip->next;
+        display(r);
+    }
+}
+
+void display_sorted(struct node * r) {
   r = head;
   if (r == NULL) {
     return;
   }
+  cout << "Pointer Data Next"<<endl;
   while (r != NULL) {
-    printf("%d ", r -> data);
+    cout << r << " " << r->data << " " << r->next<<endl;
     r = r -> next;
   }
   printf("\n");
@@ -194,6 +249,7 @@ int main() {
   	cout<<"8. Delete all"<<endl;
   	cout<<"9. Exit"<<endl;
   	cout<<"10. Bubble Sort"<<endl;
+  	cout<<"11. Selection Sort"<<endl;
   	cout<<"Enter choice: ";
   	cin >> i;
   	if(i <= 0){
@@ -265,8 +321,13 @@ int main() {
 			return 0;
 		
 		case 10:
-			cout << "Bubble sort: "<<endl;
 			bubble_sort(n);
+			display_sorted(n);
+			break;
+			
+		case 11:
+			selection_sort(n);
+			display_sorted(n);
 			break;
 			
 		default:
