@@ -149,30 +149,41 @@ void display(struct node * r) {
   printf("\n");
 }
 
+void display_sorted(struct node * r) {
+  r = head;
+  if (r == NULL) {
+    return;
+  }
+  cout << "Pointer Data Next"<<endl;
+  while (r != NULL) {
+    cout << r << " " << r->data << " " << r->next<<endl;
+    r = r -> next;
+  }
+  printf("\n");
+}
+
 void selection_sort(struct node * r) {
     int val,val1;
-    for(node *p = r, *p1, *pos; p->next != NULL; p = p->next)
-    {
+    //display_sorted(r);
+    cout << r->data;
+    exit(1);
+    for(node *p = r, *p1, *pos; p->next != NULL; p = p->next){
         val = p->data;
         pos = p;
-        for(node *q = p; q->next != NULL; q = q->next)
-        {
+        for(node *q = p; q->next != NULL; q = q->next){
             val1 = (*(q->next)).data;
-            if(val1 < val)
-            {
+            if(val1 < val){
                 val = val1;
                 pos = q;
             }
         }
-        if(val != p->data)
-        {
+        if(val != p->data){
             node *temp = pos->next;
             if( temp!= NULL)
                 pos->next = temp->next;
             else
                 pos->next = NULL;
-            if(pos != p)
-            {
+            if(pos != p){
                 temp->next = p->next;
                 p->next = pos->next;
                 pos->next = p;
@@ -188,19 +199,6 @@ void selection_sort(struct node * r) {
         }
         p1 = p;
     }
-}
-
-void display_sorted(struct node * r) {
-  r = head;
-  if (r == NULL) {
-    return;
-  }
-  cout << "Pointer Data Next"<<endl;
-  while (r != NULL) {
-    cout << r << " " << r->data << " " << r->next<<endl;
-    r = r -> next;
-  }
-  printf("\n");
 }
 
 int search(int num) {
