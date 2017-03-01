@@ -165,8 +165,6 @@ void display_sorted(struct node * r) {
 void selection_sort(struct node * r) {
     int val,val1;
     //display_sorted(r);
-    cout << r->data;
-    exit(1);
     for(node *p = r, *p1, *pos; p->next != NULL; p = p->next){
         val = p->data;
         pos = p;
