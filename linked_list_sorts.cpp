@@ -150,33 +150,43 @@ void display(struct node * r) {
 }
 
 void selection_sort(struct node * r) {
-	node *ip, *jp, *index, *swap2;
-	ip = head;
-	jp = ip;
-    for(int i = 0 ; i < count()-1 ; i++ ){
-        int min = ip->data;
-        index = ip;
-        cout <<"a"<<endl;
-        for(int j = i+1 ; j < count() ; j++ ){
-        	cout <<"b"<<endl;
-            if(jp->data < min){
-            	if(jp == head){
-                    head = swap2;
-                    jp = swap2;
-                }
-                else{
-                    cout <<"in if jp:"<< jp->data <<"min: "<<min<<endl;
-	                min = jp->data;
-	                index = jp;
-                }
+    int val,val1;
+    for(node *p = r, *p1, *pos; p->next != NULL; p = p->next)
+    {
+        val = p->info;
+        pos = p;
+        for(node *q = p; q->next != NULL; q = q->next)
+        {
+            val1 = (*(q->next)).data;
+            if(val1 < val)
+            {
+                val = val1;
+                pos = q;
             }
-            jp = jp->next;
         }
-        cout <<"c"<<endl;
-        index = ip;
-        ip->data = min;
-        ip = ip->next;
-        display(r);
+        if(val != p->data)
+        {
+            node *temp = pos->next;
+            if( temp!= NULL)
+                pos->next = temp->next;
+            else
+                pos->next = NULL;
+            if(pos != p)
+            {
+                temp->next = p->next;
+                p->next = pos->next;
+                pos->next = p;
+            }
+            else
+                temp->next = p;
+ 
+            if(p == first)
+                first = temp;
+            else
+                p1->next = temp;
+            p = temp;
+        }
+        p1 = p;
     }
 }
 
