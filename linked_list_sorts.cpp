@@ -153,7 +153,7 @@ void selection_sort(struct node * r) {
     int val,val1;
     for(node *p = r, *p1, *pos; p->next != NULL; p = p->next)
     {
-        val = p->info;
+        val = p->data;
         pos = p;
         for(node *q = p; q->next != NULL; q = q->next)
         {
@@ -180,8 +180,8 @@ void selection_sort(struct node * r) {
             else
                 temp->next = p;
  
-            if(p == first)
-                first = temp;
+            if(p == r)
+                r = temp;
             else
                 p1->next = temp;
             p = temp;
