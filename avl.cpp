@@ -4,12 +4,9 @@
 #include <algorithm>
 #define pow2(n) (1 << (n) )
 using namespace std;
-/*
-* Node Declaration
-*/
+
 struct avl_node{
-	//int data;
-	char data;
+	int data;
 	struct avl_node *left;
 	struct avl_node *right;
 }*root;
@@ -23,7 +20,7 @@ class avlTree{
 		avl_node *lr_rotation(avl_node *);
 		avl_node *rl_rotation(avl_node *);
 		avl_node* balance(avl_node *);
-		avl_node* insert(avl_node *, char);
+		avl_node* insert(avl_node *, int);
 		void display(avl_node *, int);
 		void inorder(avl_node *);
 		void preorder(avl_node *);
@@ -33,26 +30,23 @@ class avlTree{
 		}
 };
 int main(){
-	int choice, i;
+	int choice;
 	char item;
 	avlTree avl;
-	char expression[100];
-//	root = avl.insert(root, 'a');
-//	root = avl.insert(root, '+');
-//	root = avl.insert(root, 'b');
-//	root = avl.insert(root, '*');
-//	root = avl.insert(root, 'c');
 	
+	root = avl.insert(root, 8);
+	root = avl.insert(root, 30);
+	root = avl.insert(root, 35);
+	root = avl.insert(root, 5);
+	root = avl.insert(root, 7);
 	
-	//inorder = a+b*c
-	//preorder = *+abc
-	//postorder = abc+*
-	
+	//8 30 35 5 7
+	//ino 8 5 7 30 35
 	while(1){
-		cout << "\n---------------------"<<endl;
+		cout << "---------------------"<<endl;
 		cout << "AVL Tree Implementation"<<endl;
-		cout << "\n---------------------"<<endl;
-		cout << "1. Insert expression"<<endl;
+		cout << "---------------------"<<endl;
+		cout << "1. Insert Element into the tree"<<endl;
 		cout << "2. Display Balanced AVL Tree"<<endl;
 		cout << "3. InOrder traversal"<<endl;
 		cout << "4. PreOrder traversal"<<endl;
@@ -62,16 +56,9 @@ int main(){
 		cin >> choice;
 		switch(choice){
 			case 1:
-				cin.ignore();
-				cout << "Enter expression to be inserted: ";
-				cin.getline(expression,100);
-				for(int i=0; i<100; i++){
-		        	if(expression[i] == '\0'){
-						break;
-					}
-		        	else	
-		        		root = avl.insert(root, expression[i]);
-				}
+				cout << "Enter value to be inserted: ";
+				cin >> item;
+				root = avl.insert(root, item);
 				break;
 			case 2:
 				if(root == NULL){
@@ -163,7 +150,7 @@ avl_node *avlTree::balance(avl_node *temp){
 	}
 	return temp;
 }
-avl_node *avlTree::insert(avl_node *root, char value){
+avl_node *avlTree::insert(avl_node *root, int value){
 	if(root == NULL){
 		root = new avl_node;
 		root-> data = value;
@@ -173,11 +160,11 @@ avl_node *avlTree::insert(avl_node *root, char value){
 	}
 	else if(value<root->data){
 		root->left = insert(root->left,value);
-		root = balance(root);
+		//root = balance(root);
 	}
 	else if(value >= root->data){
 		root->right = insert(root->right, value);
-		root = balance(root);
+		//root = balance(root);
 	}
 	return root;
 }
