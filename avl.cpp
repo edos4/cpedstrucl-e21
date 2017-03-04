@@ -31,7 +31,7 @@ class avlTree{
 };
 int main(){
 	int choice;
-	char item;
+	int item;
 	avlTree avl;
 	
 	root = avl.insert(root, 8);
